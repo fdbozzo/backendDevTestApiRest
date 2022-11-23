@@ -19,6 +19,17 @@ public class SimilarProductController {
   @Autowired
   SimilarProductRestClient similarProductRestClient;
 
+  @GetMapping("/{productId}")
+  public Mono<ProductDetail> getProductById(@PathVariable("productId") String productId) {
+    return similarProductRestClient.getProductById(productId);
+  }
+
+  @GetMapping("/{productId}/similarids")
+  public Flux<Integer> getSimilarProductIdsByProductId(@PathVariable("productId") String productId) {
+    return similarProductRestClient
+        .getSimilarProductIdsByProductId(productId);
+  }
+
   @GetMapping("/{productId}/similar")
   public Flux<ProductDetail> getSimilarProductsByProductId(@PathVariable("productId") String productId) {
     return similarProductRestClient
